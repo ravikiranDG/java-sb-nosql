@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Understand Java, Spring Boot, and MongoDB interview essentials through clear explanations, worked examples, pitfalls, and practice questions.">
+  <meta name="color-scheme" content="dark light">
+  <title>Java / Spring Boot / NoSQL - Interview Prep</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="vendor/marked.umd.js"></script>
+  <script defer src="vendor/purify.min.js"></script>
+  <script defer src="topics.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="reading-progress" aria-hidden="true"></div>
+  <header class="mobile-header">
+    <button id="menu-toggle" aria-controls="sidebar" aria-expanded="false">Menu</button>
+    <a href="#">Backend interview prep</a>
+  </header>
+  <button id="overlay" aria-label="Close navigation" hidden></button>
+  <aside id="sidebar" aria-label="Study navigation">
+    <a class="brand" href="#">
+      <span class="brand-mark" aria-hidden="true">{ }</span>
+      <span>Backend interview prep<small>JAVA / SPRING BOOT / NOSQL</small></span>
+    </a>
+    <label class="search-label" for="search">Find a concept <kbd>/</kbd></label>
+    <input id="search" type="search" placeholder="equals, memory, transactions..." autocomplete="off">
+    <p id="search-status" class="muted" role="status"></p>
+    <nav id="navigation"></nav>
+    <div class="sidebar-bottom">
+      <p id="study-progress"></p>
+      <button id="theme-toggle" aria-label="Switch to light theme">Light theme</button>
+      <a href="https://github.com/ravikiranDG/java-sb-nosql">View on GitHub</a>
+    </div>
+  </aside>
+  <main id="main" tabindex="-1">
+    <div id="announcement" role="status"></div>
+    <section id="home"></section>
+    <section id="reader" hidden>
+      <div class="reader-toolbar">
+        <a href="#">All topics</a>
+        <label><input id="complete" type="checkbox"> Mark as reviewed</label>
+      </div>
+      <div id="chapter-meta" class="eyebrow"></div>
+      <details class="contents"><summary>On this page</summary><nav id="page-toc" aria-label="Chapter contents"></nav></details>
+      <article id="article"></article>
+      <nav id="chapter-pagination" aria-label="Previous and next chapters"></nav>
+    </section>
+    <footer>Understand the why. Explain the tradeoff. Practice the follow-up.<br>
+      Examples: Java 21 and Spring Boot 3.x conventions. Check version notes before applying them.
+    </footer>
+  </main>
+</body>
+</html>
