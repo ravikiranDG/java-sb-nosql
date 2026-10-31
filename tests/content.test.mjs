@@ -17,14 +17,36 @@ const stripCode = text => text.replace(/```[\s\S]*?```/g, '');
 const slugs = text => [...stripCode(text).matchAll(/^#{2,3} (.+)$/gm)].map(([, heading]) =>
   heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
 
-test('manifest has 3 tracks, 21 unique chapters, and no unlisted chapters', async () => {
+test('manifest has 3 tracks, 26 unique chapters, and no unlisted chapters', async () => {
   assert.equal(tracks.length, 3);
-  assert.equal(files.length, 21);
+  assert.equal(files.length, 26);
   assert.equal(new Set(files).size, files.length);
   for (const track of tracks) {
     const actual = (await readdir(path.join(root, track.id))).filter(file => file.endsWith('.md'));
     assert.deepEqual(actual.sort(), [...track.topics.map(([id]) => `${id}.md`)].sort());
   }
+});
+
+test('64 interview-bank questions contain model answers, traps and follow-ups', () => {
+  let total = 0;
+  for (const track of tracks) {
+    const text = markdown.get(`${track.id}/interview-questions.md`);
+    const questions = [...text.matchAll(/^## Q(\d+)\. .+$/gm)];
+    assert.equal(questions.length, track.interviewQuestions);
+    total += questions.length;
+    questions.forEach((question, index) => {
+      assert.equal(Number(question[1]), index + 1, 'sequential question numbering');
+      const end = questions[index + 1]?.index ?? text.indexOf('## Self-checks', question.index);
+      assert.ok(end > question.index, 'question has a complete section');
+      const answer = text.slice(question.index, end);
+      assert.ok(answer.includes('Model answer:'), 'model answer provided');
+      assert.ok(answer.includes('**Trap:**'), 'common mistake explained');
+      assert.ok(answer.includes('**Follow-up:**'), 'follow-up provided');
+      assert.ok(answer.split(/\s+/).length >= 50, 'more than a one-line definition');
+    });
+  }
+  assert.equal(total, 64);
+  assert.equal([...markdown.values()].reduce((sum, text) => sum + (text.match(/<details>/g) || []).length, 0), 78);
 });
 
 for (const [file, text] of markdown) {

@@ -23,6 +23,12 @@ jobs:
           node-version: '22'
       - name: Validate chapters, links, scripts, and deployment files
         run: node --test
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile and verify runnable interview examples
+        run: node scripts/check-java.mjs
       - name: Build static site
         run: node scripts/build.mjs
       - name: Configure Pages

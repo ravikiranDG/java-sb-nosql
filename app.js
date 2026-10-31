@@ -4,6 +4,7 @@ const chapters = window.TRACKS.flatMap(track => track.topics.map(([id, title, ke
   file: `${track.id}/${id}.md`, title, keywords, track: track.title, number: index + 1
 })));
 const byFile = new Map(chapters.map(chapter => [chapter.file, chapter]));
+const interviewQuestionCount = window.TRACKS.reduce((sum, track) => sum + track.interviewQuestions, 0);
 const documents = new Map();
 let activeFile = null;
 let routeVersion = 0;
@@ -54,11 +55,22 @@ function buildHome() {
       <div class="eyebrow">The backend interview field guide</div>
       <h1>Don't just know the answer.<br><span>Understand the why.</span></h1>
       <p>Java, Spring Boot, and MongoDB essentials explained like a teammate would explain them:
-      clear mental models, worked examples, and the follow-up questions that reveal real understanding.</p>
+      must-know concepts, interview questions with model answers, runnable implementations,
+      and the follow-up questions that reveal real understanding.</p>
       <div class="pill-row"><span class="pill">3 learning tracks</span>
-      <span class="pill">${chapters.length} focused chapters</span><span class="pill">63 answered self-checks</span>
-      <span class="pill">Examples + interview pitfalls</span></div>
+      <span class="pill">${chapters.length} focused chapters</span>
+      <span class="pill">${interviewQuestionCount} interview questions + answers</span>
+      <span class="pill">${chapters.length * 3} answered self-checks</span></div>
     </div>
+    <section class="path"><h2>Start with the interview question banks</h2>
+      <p>Practice an answer aloud, trace the example, identify the trap, and attempt the follow-up.
+      Use the linked implementation chapters when you need to write the code, not just name the concept.</p>
+      <ul>${window.TRACKS.map(track => `<li><a href="#${track.id}/interview-questions.md">
+        ${track.title}: ${track.interviewQuestions} essential interview questions and model answers</a></li>`).join('')}</ul>
+      <p>New implementation drills:
+      <a href="#java/ordering.md">Comparable versus Comparator</a> and
+      <a href="#java/custom-exceptions.md">custom exceptions with Spring error handling</a>.</p>
+    </section>
     <section class="path"><h2>A practical study path</h2>
       <p>Start with <a href="#java/equality.md">equality</a>, then <a href="#java/memory.md">memory</a>
       and <a href="#java/collections.md">collections</a>. Move to

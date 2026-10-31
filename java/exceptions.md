@@ -67,6 +67,8 @@ String result = value.orElseGet(() -> "fallback");
 
 ## Sources
 
+For implementation practice, continue with [custom exceptions: define, throw, catch, and map to Spring responses](custom-exceptions.md) and the [Java interview question bank](interview-questions.md).
+
 - [Java exception rules](https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html)
 - [Try-with-resources semantics](https://docs.oracle.com/javase/specs/jls/se21/html/jls-14.html#jls-14.20.3)
 - [Optional](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html)
